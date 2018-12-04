@@ -1,7 +1,7 @@
 {
   "name": "style-replacer",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "yft <1059802125@qq.com>",
   "license": "MIT",
   "main": "dist/style-replacer.min.js",
