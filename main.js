@@ -1,16 +1,20 @@
 function writeNewStyle(sheet, styleDic) {
   let cssText = sheet.innerText;
-  Object.keys(styleDic).forEach(key => {
-    cssText = cssText.replace(new RegExp('(:|\\s+)' + key, 'g'), '$1' + styleDic[key]);
-  });
+  for (let key in styleDic) {
+    if (styleDic.hasOwnProperty(key)) {
+      cssText = cssText.replace(new RegExp('(:|\\s+)' + key, 'g'), '$1' + styleDic[key]);
+    }
+  }
   sheet.innerText = cssText;
 }
 
 export function replaceStyle(styleDic) {
-  let sheets = Array.from(document.styleSheets).map(item => item.ownerNode).filter(item => item.tagName === 'STYLE');
-  sheets.map(sheet => {
-    writeNewStyle(sheet, styleDic);
-  });
+  let sheets = document.styleSheets, len = sheets.length;
+  for (let i = 0; i < len; i++) {
+    if (sheets[i].ownerNode.tagName === 'STYLE') {
+      writeNewStyle(sheets[i].ownerNode, styleDic);
+    }
+  }
 }
 
 if (window && !window.StyleReplacer) {
